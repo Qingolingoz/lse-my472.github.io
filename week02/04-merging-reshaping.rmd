@@ -4,6 +4,7 @@ We often want to convert the format in which a data frame is structured, from wi
 
 ```{r}
 d <- read.csv("unvoting.csv", stringsAsFactors=F)
+#this opens csv
 dd <- d[d$CountryAbb %in% c("HUN", "AUS") & d$Year %in% 2010:2012, 
         c("Year", "CountryAbb", "idealpoint")]
 
