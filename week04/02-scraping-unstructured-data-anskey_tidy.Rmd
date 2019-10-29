@@ -29,7 +29,7 @@ library(stringi)
 library(rvest)
 # reading the HTML code
 bribe_html <- read_html(url) # reading the HTML code
-# identify the CSS selector
+# identify the CSS selector s 
 bribe_nodes <- html_nodes(bribe_html, css = ".paid-amount span")
 # content of CSS selector
 bribe_nodes 

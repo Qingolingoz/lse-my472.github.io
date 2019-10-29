@@ -62,6 +62,7 @@ legend(x = 'topleft', col = c("red", "blue"), lty = 1, legend = c("male", "femal
 ## ggplot requires the data to be in tidy shape. for that we use 
 ## melt() function in reshape2
 library(ggplot2)
+#Melt (data_pop[, 1:3], states that you only want the first three columns going by year
 data_pop_melt <- reshape2::melt(data_pop[, 1:3], id.vars = "year")
 ggplot(data_pop_melt) + aes(x = year, y = value, group = variable, colour = variable) + 
   geom_line() + scale_y_log10()
@@ -79,7 +80,11 @@ url <- "https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population
 =======
 ```{r}
 url <- 'https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population'
+<<<<<<< Updated upstream
 >>>>>>> 22a50d5cbf8e5d3a0cc1ed58986b6796351d6fe5:week04/01-scraping-tables-anskeyAM.Rmd
+=======
+#go into view developer, view source
+>>>>>>> Stashed changes
 html <- read_html(url)
 tables <- html_table(html, fill=TRUE)
 length(tables)
@@ -94,6 +99,7 @@ In the source code, search for the text of the page (e.g. _2017 rank_). Right ab
 Now that we now what we're looking for, let's use `html_nodes()` to identify all the elements of the page that have that CSS class. (Note that we need to use a dot before the name of the class to indicate it's CSS.)
 
 ```{r}
+#. before class indicates the css
 wiki <- html_nodes(html, '.wikitable')
 length(wiki)
 ```
@@ -117,10 +123,13 @@ pop$rank <-
 pop <- pop[, c("rank", "population", "city_name")]
 =======
 ```{r}
+#Remove things with square brackets, \\ helps conver square brackets to regular expression. So 
 data_pop$city_name <- gsub('\\[.*\\]', '', data_pop$City)
-data_pop$population <- data_pop[,"2017estimate"]
+data_pop$population <- data_pop[,"2018estimate"]
+#Remove commas and making things numeric
 data_pop$population <- as.numeric(gsub(",", "", data_pop$population))
-data_pop$rank <- data_pop[,"2017rank"]
+data_pop$rank <- data_pop[,"2018rank"]
+#Write over data_pop with these three columns
 data_pop <- data_pop[,c("rank", "population", "city_name")]
 >>>>>>> 22a50d5cbf8e5d3a0cc1ed58986b6796351d6fe5:week04/01-scraping-tables-anskeyAM.Rmd
 ```
